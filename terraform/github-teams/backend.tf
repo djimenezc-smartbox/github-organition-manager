@@ -7,12 +7,12 @@ terraform {
     }
   }
 
-#   backend "remote" {
-#     hostname     = "app.terraform.io"
-#     organization = "djimenezc"
-#
-#     workspaces {
-#       name = "voxsmart"
-#     }
-#   }
+  #   backend "remote" {
+  #     hostname     = "app.terraform.io"
+  #     organization = "djimenezc"
+  #
+  #     workspaces {
+  #       name = "voxsmart"
+  #     }
+  #   }
 }

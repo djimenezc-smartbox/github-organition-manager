@@ -1,10 +1,10 @@
 provider "github" {
-#   alias = "usw1"
+  #   alias = "usw1"
   owner = var.github_organization
   app_auth {
     id              = var.github_app_id
     installation_id = var.github_app_installation_id
-    pem_file = file(var.github_app_pem_file_path)
+    pem_file        = file(var.github_app_pem_file_path)
   }
 }
 
@@ -61,7 +61,7 @@ locals {
 }
 
 resource "github_team_repository" "some_team_repo" {
-  for_each = local.repository_team_relationship
+  for_each   = local.repository_team_relationship
   team_id    = each.value.team_id
   repository = each.value.repo_name
   permission = each.value.permission

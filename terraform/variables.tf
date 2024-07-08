@@ -1,10 +1,10 @@
 variable "github_app_id" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "github_app_installation_id" {
-  type = string
+  type      = string
   sensitive = true
 }
 

@@ -3,32 +3,47 @@ name: CI
 on:
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: hashicorp/terraform:latest
+      image: djimenezc/devops-tools
       env:
-        GITHUB_APP_ID: "${{ secrets.TF_VAR_github_app_id }}"
-        GITHUB_APP_INSTALLATION_ID: "${{ secrets.TF_VAR_github_app_id }}"
-        GITHUB_APP_PEM_FILE: "${{ secrets.TF_github_app_pem_file }}"
+        TF_VAR_github_app_id: "${{ secrets.TF_github_app_id }}"
+        TF_VAR_github_app_installation_id: "${{ secrets.TF_github_app_installation_id }}"
+        TF_VAR_github_app_pem_file: "${{ secrets.TF_github_app_pem_file }}"
+        TF_VAR_github_app_pem_file_path: "${{ secrets.TF_github_app_pem_file_path }}"
         AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID}}"
         AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY}}"
+        AWS_DEFAULT_REGION: "eu-west-1"
+
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: install git-secret
-        run: |
-          sudo sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list"
-          wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | sudo apt-key add -
-          sudo apt-get update && sudo apt-get install -y git-secret
-  
-          # Testing, that it worked:
-          git secret --version
+      - name: create pem file
+        working-directory: ./terraform
+        run: echo "${{ secrets.TF_github_app_pem_file }}" | base64 -d > "${{ secrets.TF_github_app_pem_file_path }}"
+
+      - name: aws account
+        working-directory: ./terraform
+        run: aws sts get-caller-identity
+
+      - name: export
+        working-directory: ./terraform
+        run: export && ls
 
       - name: Terraform Init
         working-directory: ./terraform
-        run: make init
+        run: make terraform-init
+
+      - name: Terraform validate
+        working-directory: ./terraform
+        run: make terraform-validate
+
+      - name: Terraform plan
+        working-directory: ./terraform
+        run: make terraform-plan
 
