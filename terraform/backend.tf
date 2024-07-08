@@ -15,4 +15,12 @@ terraform {
 #       name = "voxsmart"
 #     }
 #   }
+
+  backend "s3" {
+    key                  = "terraform.tfstate"
+    workspace_key_prefix = "github-organization"
+    region               = "eu-west-1"
+    dynamodb_table       = "terraform-locks"
+    encrypt              = true
+  }
 }
