@@ -73,7 +73,8 @@ To pass the values in the Terraform variables define the following env variables
 
 ### Prerequisites
 
-### Installation
+- Terraform 1.9.1
+- GitHub App credentials
 
 ## Usage
 
@@ -92,6 +93,25 @@ make terraform-init
 Using terraform cloud we need to specify the workspace name as part of the terraform configuration. In this case we have chosen the name of our organization (VoxSmart).
 
 The settings to model our organization are defined in the file voxsmart.tfvars.
+
+the file .tfvars contains the configuration of the repositories and the permissions:
+
+- repositories: define the main properties of a repository and the team and the permission associated
+- teams: define the list of teams in the organization and the username of the members
+
+Now you could run the plan command to see the expected resources provisioned by terraform
+
+```shell
+make terraform-plan
+```
+
+or you could apply the changes directly running
+
+```shell
+make terraform-apply
+```
+
+By default, voxsmart.tfvars file is selected after running the plan or apply command. It is possible to switch to a different configuration setting the env variable SETTINGS up to a different file name
 
 ## CI/CD
 

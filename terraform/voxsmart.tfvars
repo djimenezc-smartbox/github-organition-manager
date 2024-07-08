@@ -8,7 +8,17 @@ repositories = [
     has_issues: false
     has_projects: true
     has_discussions: true
-    has_wiki: true
+    has_wiki: true,
+    team_permissions: [
+      {
+        team_name: "backend",
+        permission: "admin"
+      },
+      {
+        team_name: "frontend",
+        permission: "pull"
+      }
+    ]
   },
   {
     name: "voxsmart-service-ui"
@@ -17,7 +27,13 @@ repositories = [
     has_issues: true
     has_projects: true
     has_discussions: false
-    has_wiki: false
+    has_wiki: false,
+    team_permissions: [
+      {
+        team_name: "frontend",
+        permission: "admin"
+      }
+    ]
   },
   {
     name: "voxsmart-service-sdk"
@@ -26,7 +42,17 @@ repositories = [
     has_issues: true
     has_projects: false
     has_discussions: true
-    has_wiki: true
+    has_wiki: true,
+    team_permissions: [
+      {
+        team_name: "backend",
+        permission: "pull"
+      },
+      {
+        team_name: "frontend",
+        permission: "pull"
+      }
+    ]
   }
 ]
 
