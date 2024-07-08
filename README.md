@@ -38,7 +38,7 @@ I think nowadays the best tool in the market to manage a GitHub organization and
 
 Terraform is an open-source IaC solution created by HashiCorp and primarily employed by DevOps teams.
 
-Te most outstanding features to pick up Terraform are:
+The most outstanding features to pick up Terraform are:
 
 - Provider Agnostic
 - Modularity
@@ -51,8 +51,23 @@ The GitHub provider offers multiple ways to authenticate with GitHub API.
 The best idea to authenticate our process against GitHub API is installing a GitHub App 
 
 ```terraform
-
+provider "github" {
+  owner = var.github_organization
+  app_auth {
+    id              = var.github_app_id
+    installation_id = var.github_app_installation_id
+    pem_file        = file(var.github_app_pem_file_path)
+  }
+}
 ```
+
+The information is fetched from your organization Settings page. Firstly you should have set up a GitHub App as indicated in this article [Authenticating Terraform With a GitHub App](https://solideogloria.tech/terraform/authenticating-terraform-with-a-github-app/)
+
+To pass the values in the Terraform variables define the following env variables:
+
+- github_app_id
+- github_app_installation_id
+- github_app_pem_file
 
 ## Getting Started
 
@@ -74,12 +89,9 @@ As a second step you need to initialize the terraform project running the follow
 make terraform-init
 ```
 
-Using terraform cloud we need to specify the workspace name as part of the terraform configuration. In this case we have chosen the name of our organization (SmartBox).
+Using terraform cloud we need to specify the workspace name as part of the terraform configuration. In this case we have chosen the name of our organization (VoxSmart).
 
-The settings to model our organization are defined in the file smartbox.tfvars.
-
-
-
+The settings to model our organization are defined in the file voxsmart.tfvars.
 
 ## CI/CD
 
@@ -89,3 +101,4 @@ The settings to model our organization are defined in the file smartbox.tfvars.
 - [Terraform cloud](https://developer.hashicorp.com/terraform/tutorials/cloud/cloud-migrate)
 - [GitHub Provider](https://registry.terraform.io/providers/integrations/github/latest/docs)
 - [Authenticating Terraform With a GitHub App](https://solideogloria.tech/terraform/authenticating-terraform-with-a-github-app/)
+- [Authenticating as a GitHub App installation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation)

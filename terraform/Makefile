@@ -1,6 +1,6 @@
 SELF_DIR ?= ./
 CURRENT_DIR_NAME:=$(shell echo "${SELF_DIR}" | rev | cut -d'/' -f 1 | rev)
-SETTINGS ?= smartbox
+SETTINGS ?= voxsmart
 
 ENV_EXTRA_VARS ?=
 EXTRA_VARS ?=  $(shell test -f ${SETTINGS}.tfvars && echo "-var-file=${SETTINGS}.tfvars" || echo '')

@@ -1,5 +1,3 @@
-variable "github_organization" {}
-
 variable "github_app_id" {
   type = string
   sensitive = true

@@ -1,4 +1,5 @@
 provider "github" {
+  alias  = "usw1"
   owner = var.github_organization
   app_auth {
     id              = var.github_app_id
@@ -7,16 +8,24 @@ provider "github" {
   }
 }
 
-module "github-organization" {
-  source = "./github-organization"
+module "github-repositories" {
+  source = "./github-repositories"
 
+  github_organization = var.github_organization
 
+  repositories = var.repositories
+
+  providers = {
+    github = github.usw1
+  }
 }
 
-resource "github_repository" "example" {
-  name        = "example"
-  description = "My awesome codebase"
+module "github-teams" {
+  source = "./github-teams"
 
-  visibility = "private"
+  teams = var.teams
 
+  providers = {
+    github = github.usw1
+  }
 }
