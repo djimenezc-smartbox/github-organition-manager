@@ -8,8 +8,8 @@ resource "github_team" "teams" {
 locals {
   team_members = flatten([
     for team_name, team in var.teams : [
-      for member in team.members :[
-        for team in github_team.teams :[
+      for member in team.members : [
+        for team in github_team.teams : [
           merge(team, {
             username : member
           })

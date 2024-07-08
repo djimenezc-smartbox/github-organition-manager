@@ -12,9 +12,10 @@ AWS_DEFAULT_REGION ?= eu-west-1
 TERRAFORM_BUCKET_NAME ?= djimenezc-terraform-remote-state-${AWS_ACCOUNT}
 TERRAFORM_LOCK_TABLE_NAME ?= terraform-locks
 
-export TF_github_app_id ?= ${GITHUB_APP_ID}
-export TF_github_app_installation_id ?= ${GITHUB_APP_INSTALLATION_ID}
-export TF_github_app_pem_file ?= ${GITHUB_APP_PEM_FILE}
+export TF_VAR_github_app_id ?= ${GITHUB_APP_ID}
+export TF_VAR_github_app_installation_id ?= ${GITHUB_APP_INSTALLATION_ID}
+export TF_VAR_github_app_pem_file ?= ${GITHUB_APP_PEM_FILE}
+export TF_VAR_github_app_pem_file_path ?= ${GITHUB_APP_PEM_FILE}
 export TF_workspace ?= $(SETTINGS)
 export TF_VAR_aws_region ?= ${AWS_DEFAULT_REGION}
 
@@ -24,6 +25,9 @@ get-current-dir:
 get-current-dir-name:
 	echo $(EXTRA_VARS)
 	@echo $(CURRENT_DIR_NAME)
+
+get-aws-account:
+	aws sts get-caller-identity
 
 #Terraform
 aws-terraform-create-s3-backend:
