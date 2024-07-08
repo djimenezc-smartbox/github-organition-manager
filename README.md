@@ -75,6 +75,7 @@ To pass the values in the Terraform variables define the following env variables
 
 - Terraform 1.9.1
 - GitHub App credentials
+- AWS credentials (use to store TF remote state files)
 
 ## Usage
 
