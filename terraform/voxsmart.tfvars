@@ -53,6 +53,25 @@ repositories = [
         permission : "pull"
       }
     ]
+  },
+  {
+    name : "voxsmart-test"
+    description : "voxsmart service test"
+    visibility : "public"
+    has_issues : true
+    has_projects : false
+    has_discussions : true
+    has_wiki : true,
+    team_permissions : [
+      {
+        team_name : "backend",
+        permission : "pull"
+      },
+      {
+        team_name : "frontend",
+        permission : "pull"
+      }
+    ]
   }
 ]
 
