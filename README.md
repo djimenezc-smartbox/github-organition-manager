@@ -115,8 +115,6 @@ Now you could run the plan command to see the expected resources provisioned by 
 make terraform-plan
 ```
 
-![img5.png](img.png)
-
 or you could apply the changes directly running
 
 ```shell
